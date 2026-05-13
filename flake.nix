@@ -48,14 +48,20 @@
             imports = [
               dotfiles-global.homeManagerModules.default
               ./nix/home/git.nix
+              ./nix/home/packages.nix
             ];
             # マシン固有ファイルを追加配置
             home.file.".hammerspoon/modules/command_launcher_local.lua".source =
-              ./.hammerspoon/modules/command_launcher_local.lua;
+              ./files/command_launcher_local.lua;
+            home.file.".hammerspoon/modules/snippets_local.lua".source =
+              ./files/snippets_local.lua;
             home.file.".config/aerospace/wallpaper_config.sh".source =
-              ./.config/aerospace/wallpaper_config.sh;
+              ./files/wallpaper_config.sh;
           };
-          nixpkgs.overlays = [ dotfiles-global.overlays.claude-code ];
+          nixpkgs.overlays = [
+            dotfiles-global.overlays.claude-code
+            dotfiles-global.overlays.apm-cli
+          ];
           nixpkgs.config.allowUnfreePredicate = pkg:
             builtins.elem (nixpkgs.lib.getName pkg) [ "claude-code" ];
         }

@@ -3,10 +3,15 @@
 local launcher = require("modules.command_launcher")
 local home = os.getenv("HOME")
 
--- TODO: マシン固有のコマンドランチャーを設定
--- キーとアプリの対応を定義する
--- launcher.commands.a = "open -a 'SomeApp'"
--- launcher.commands.c = "open '" .. home .. "/Applications/Chrome Apps.localized/SomeApp.app'"
+-- TODO: マシン固有のキー→コマンド対応を追加
+local local_commands = {
+  -- a = "open -a 'SomeApp'",
+  -- c = "open '" .. home .. "/Applications/Chrome Apps.localized/SomeApp.app'",
+}
+
+for key, cmd in pairs(local_commands) do
+  launcher.commands[key] = cmd
+end
 
 -- 修飾キー+Enter: MagicBoard トグル
 hs.hotkey.bind(launcher.mods, "return", function()

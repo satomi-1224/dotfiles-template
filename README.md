@@ -9,11 +9,14 @@ flake.nix                          dotfiles-global を input で参照し darwin
 nix/
   darwin/default.nix               マシン固有の homebrew casks 等
   home/git.nix                     マシン固有の git user.name / user.email
-.hammerspoon/
-  modules/command_launcher_local.lua   マシン固有のコマンドランチャー
-.config/
-  aerospace/wallpaper_config.sh    マシン固有の壁紙マッピング
+  home/packages.nix                マシン固有の追加パッケージ
+files/
+  command_launcher_local.lua       マシン固有のコマンドランチャー
+  snippets_local.lua               マシン固有のスニペット
+  wallpaper_config.sh              マシン固有の壁紙マッピング
 ```
+
+`files/` 以下のファイルは `flake.nix` の `home.file` で Home Manager がシンボリックリンクを作成する。
 
 ## セットアップ
 
@@ -37,8 +40,10 @@ cd ~/Work/dotfiles
 - `flake.nix` — `hostname`, `username`, `system` を変更
 - `nix/home/git.nix` — git の `user.name`, `user.email` を設定
 - `nix/darwin/default.nix` — マシン固有の homebrew casks を追加
-- `.hammerspoon/modules/command_launcher_local.lua` — コマンドランチャーのキー割当
-- `.config/aerospace/wallpaper_config.sh` — 壁紙のパス
+- `nix/home/packages.nix` — マシン固有の追加パッケージ
+- `files/command_launcher_local.lua` — コマンドランチャーのキー割当
+- `files/snippets_local.lua` — スニペット
+- `files/wallpaper_config.sh` — 壁紙のパス
 
 ### 4. ビルド & 適用
 
@@ -94,6 +99,7 @@ darwin-rebuild switch --flake .
 
 - **homebrew cask**: `nix/darwin/default.nix` の `homebrew.casks` に追加
 - **git 設定**: `nix/home/git.nix` を編集
-- **Hammerspoon コマンド**: `.hammerspoon/modules/command_launcher_local.lua` を編集
-- **壁紙**: `.config/aerospace/wallpaper_config.sh` を編集
-- **パッケージ追加**: `nix/home/` に新しい `.nix` ファイルを作り、`flake.nix` の imports に追加
+- **パッケージ追加**: `nix/home/packages.nix` を編集
+- **Hammerspoon コマンド**: `files/command_launcher_local.lua` の `local_commands` テーブルに追加
+- **スニペット**: `files/snippets_local.lua` の `local_snippets` テーブルに追加
+- **壁紙**: `files/wallpaper_config.sh` を編集
