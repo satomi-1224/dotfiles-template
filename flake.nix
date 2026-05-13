@@ -52,11 +52,11 @@
             ];
             # マシン固有ファイルを追加配置
             home.file.".hammerspoon/modules/command_launcher_local.lua".source =
-              ./files/command_launcher_local.lua;
+              ./.hammerspoon/modules/command_launcher_local.lua;
             home.file.".hammerspoon/modules/snippets_local.lua".source =
-              ./files/snippets_local.lua;
+              ./.hammerspoon/modules/snippets_local.lua;
             home.file.".config/aerospace/wallpaper_config.sh".source =
-              ./files/wallpaper_config.sh;
+              ./.config/aerospace/wallpaper_config.sh;
           };
           nixpkgs.overlays = [
             dotfiles-global.overlays.claude-code
